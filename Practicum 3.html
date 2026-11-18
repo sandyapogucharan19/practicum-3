@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devstream Portal - Continuous Integration & DevOps Automation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            padding: 20px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+        }
+        h2 {
+            margin-top: 0;
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+        }
+
+        p.desc {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            font-weight: bold;
+            vertical-align: top;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 250px;
+            padding: 4px;
+            border: 1px solid #000;
+        }
+
+        textarea {
+            height: 60px;
+        }
+
+        .btn-group {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        button, input[type="submit"], input[type="reset"] {
+            padding: 5px 15px;
+            margin: 0 5px;
+            border: 1px solid #000;
+            background-color: #e0e0e0;
+            cursor: pointer;
+        }
+
+        button:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #cccccc;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .active-page {
+            display: block;
+        }
+
+        .nav-links {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .nav-links a {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #000;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .user-info {
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: LOGIN PAGE -->
+    <div id="loginPage" class="container page active-page">
+        <h2>Devstream Portal</h2>
+        <p class="desc">Continuous Integration and DevOps Automation</p>
+        
+        <h3>User Login</h3>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="loginEmail">Email Address:</label>
+                <input type="email" id="loginEmail" required placeholder="name@domain.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" required>
+            </div>
+            
+            <div class="btn-group">
+                <input type="submit" value="Login">
+                <input type="reset" value="Clear">
+            </div>
+        </form>
+
+        <div class="nav-links">
+            Don't have an account? <a onclick="showPage('signupPage')">Sign Up here</a>
+        </div>
+    </div>
+
+    <!-- PAGE 2: SIGN UP PAGE -->
+    <div id="signupPage" class="container page">
+        <h2>Devstream Portal</h2>
+        <p class="desc">Continuous Integration and DevOps Automation</p>
+        
+        <h3>Create New Account</h3>
+        <form id="signupForm" onsubmit="handleSignup(event)">
+            <div class="form-group">
+                <label for="regName">Full Name:</label>
+                <input type="text" id="regName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regEmail">Email Address:</label>
+                <input type="email" id="regEmail" required placeholder="name@domain.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="regPassword">Password:</label>
+                <input type="password" id="regPassword" required>
+            </div>
+
+            <div class="form-group">
+                <label for="regRole">User Role:</label>
+                <select id="regRole" required>
+                    <option value="">-- Select Role --</option>
+                    <option value="DevOps Engineer">DevOps Engineer</option>
+                    <option value="Software Developer">Software Developer</option>
+                    <option value="System Administrator">System Administrator</option>
+                </select>
+            </div>
+            
+            <div class="btn-group">
+                <input type="submit" value="Register">
+                <input type="reset" value="Clear">
+            </div>
+        </form>
+
+        <div class="nav-links">
+            Already registered? <a onclick="showPage('loginPage')">Login here</a>
+        </div>
+    </div>
+
+    <!-- PAGE 3: DASHBOARD PAGE -->
+    <div id="dashboardPage" class="container page">
+        <div class="header-bar">
+            <strong>Devstream Dashboard</strong>
+            <div class="user-info">
+                User: <span id="displayUser">Guest</span> | 
+                <a onclick="showPage('loginPage')">Logout</a>
+            </div>
+        </div>
+
+        <h2>Devstream Service Setup</h2>
+        <p class="desc">Continuous Integration and DevOps Automation</p>
+
+        <form id="serviceForm" onsubmit="handleServiceSubmit(event)">
+            <div class="form-group">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="street">Street Address:</label>
+                <input type="text" id="street" name="street" required>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+
+            <div class="form-group">
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required>
+            </div>
+
+            <div class="form-group">
+                <label for="zipCode">Zip Code:</label>
+                <input type="text" id="zipCode" name="zipCode" required>
+            </div>
+
+            <div class="form-group">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" placeholder="(###) ###-####" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail Address:</label>
+                <input type="email" id="email" name="email" placeholder="name@domain.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="serviceType">Service Type:</label>
+                <select id="serviceType" name="serviceType" required>
+                    <option value="">-- Select Service --</option>
+                    <option value="CI/CD Pipeline Setup">CI/CD Pipeline Setup</option>
+                    <option value="Docker Containerization">Docker Containerization</option>
+                    <option value="Kubernetes Orchestration">Kubernetes Orchestration</option>
+                    <option value="Cloud Infrastructure Automation">Cloud Infrastructure Automation</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="accountNo">Account Number:</label>
+                <input type="text" id="accountNo" name="accountNo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="requests">Special Requests:</label>
+                <textarea id="requests" name="requests" placeholder="Enter your request here..."></textarea>
+            </div>
+
+            <div class="btn-group">
+                <input type="submit" value="Submit">
+                <input type="reset" value="Clear">
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(function(page) {
+                page.classList.remove('active-page');
+            });
+            document.getElementById(pageId).classList.add('active-page');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            var email = document.getElementById('loginEmail').value;
+            document.getElementById('displayUser').innerText = email;
+            alert('Login successful!');
+            showPage('dashboardPage');
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            var name = document.getElementById('regName').value;
+            alert('Registration successful for ' + name + '! Please login.');
+            showPage('loginPage');
+        }
+
+        function handleServiceSubmit(event) {
+            event.preventDefault();
+            alert('Devstream Automation Request Submitted Successfully!');
+            document.getElementById('serviceForm').reset();
+        }
+    </script>
+</body>
+</html>
